@@ -1,0 +1,96 @@
+---
+title: "Non-disclosive Exposome analysis using Google Cloud and dsExposome"
+format: html
+execute: 
+  cache: true
+---
+
+
+## Meet Google Cloud
+
+[Google Cloud](cloud.google.com) is a cloud-based computing platform that offers a wide variety of services. For this demonstration, we have spined-up a simple `Compute Engine` with `debian-11-bullseye-v20221206` and `docker 20.10.22`.
+
+This is basically a server instance similar to what could be found in a typical research institution, but instead of being on-premises, it is hosted on the cloud by Google.
+
+Hardware wise, we have used a 4 core 16GB RAM instance with 50GB of SSD storage. At the time of writing, such specs are billed at \~120 USD per month.
+
+## Exposome analysis
+
+In order to demonstrate a fully reproducible analysis pipeline, we will follow the [actual vignette](https://isglobal-brge.github.io/dsExposomeClient/articles/dsExposome.html) from the `dsExposomeClient` package. That means that on the Google Cloud instance we have uploaded the same dataset.
+
+### Connecting to the Opal server
+
+
+```{r}
+#| output: false
+require('DSI')
+require('DSOpal')
+require('dsBaseClient')
+require('dsExposomeClient')
+
+user <- "test"
+pass <- "Testtest1!"
+
+library(httr);set_config(config(ssl_verifypeer = 0L))
+
+builder <- DSI::newDSLoginBuilder()
+builder$append(server = 'server1', 
+               url = "https://35.219.173.160/repo",
+               user = user, 
+               password = pass, 
+               profile = "default")
+logindata <- builder$build()
+conns <- DSI::datashield.login(logins = logindata, assign = F)
+```
+
+
+### Assigning the resource
+
+
+```{r}
+datashield.assign.resource(
+  conns, 
+  symbol = 'exposome_resource', 
+  resource = list(server1 = 'EXPOSOME.exposomeSet')
+)
+ds.class("exposome_resource")
+
+datashield.assign.expr(
+  conns, 
+  symbol = "exposome_resource", 
+  expr = quote(as.resource.object(exposome_resource))
+)
+ds.class("exposome_resource")
+```
+
+
+### Working with the data
+
+
+```{r}
+ds.exposome_summary("exposome_resource", "AbsPM25")
+```
+
+```{r}
+phenos <- ds.tableMissings("exposome_resource", set = "phenotypes")
+ds.plotMissings(phenos)
+```
+
+```{r}
+#| output: false
+exwas_results <- ds.exwas(
+  "blood_pre ~ sex", 
+  Set = "exposome_resource", 
+  family = "gaussian",
+  type = "meta"
+)
+```
+
+```{r}
+ds.plotExwas(exwas_results, type="manhattan")
+```
+
+```{r}
+datashield.logout(conns)
+```
+

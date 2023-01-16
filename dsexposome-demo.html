@@ -1,0 +1,5243 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Non-disclosive Exposome analysis using Google Cloud and dsExposome</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="dsexposome-demo_files/libs/clipboard/clipboard.min.js"></script>
+<script src="dsexposome-demo_files/libs/quarto-html/quarto.js"></script>
+<script src="dsexposome-demo_files/libs/quarto-html/popper.min.js"></script>
+<script src="dsexposome-demo_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="dsexposome-demo_files/libs/quarto-html/anchor.min.js"></script>
+<link href="dsexposome-demo_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="dsexposome-demo_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="dsexposome-demo_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="dsexposome-demo_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="dsexposome-demo_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Non-disclosive Exposome analysis using Google Cloud and dsExposome</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="meet-google-cloud" class="level2">
+<h2 class="anchored" data-anchor-id="meet-google-cloud">Meet Google Cloud</h2>
+<p><a href="cloud.google.com">Google Cloud</a> is a cloud-based computing platform that offers a wide variety of services. For this demonstration, we have spined-up a simple <code>Compute Engine</code> with <code>debian-11-bullseye-v20221206</code> and <code>docker 20.10.22</code>.</p>
+<p>This is basically a server instance similar to what could be found in a typical research institution, but instead of being on-premises, it is hosted on the cloud by Google.</p>
+<p>Hardware wise, we have used a 4 core 16GB RAM instance with 50GB of SSD storage. At the time of writing, such specs are billed at ~120 USD per month.</p>
+</section>
+<section id="exposome-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="exposome-analysis">Exposome analysis</h2>
+<p>In order to demonstrate a fully reproducible analysis pipeline, we will follow the <a href="https://isglobal-brge.github.io/dsExposomeClient/articles/dsExposome.html">actual vignette</a> from the <code>dsExposomeClient</code> package. That means that on the Google Cloud instance we have uploaded the same dataset.</p>
+<section id="connecting-to-the-opal-server" class="level3">
+<h3 class="anchored" data-anchor-id="connecting-to-the-opal-server">Connecting to the Opal server</h3>
+<div class="cell" data-hash="dsexposome-demo_cache/html/unnamed-chunk-1_276515af38f36ca491daa058350fb9e8">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(<span class="st">'DSI'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: DSI</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: progress</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: R6</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(<span class="st">'DSOpal'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: DSOpal</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: opalr</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: httr</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(<span class="st">'dsBaseClient'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: dsBaseClient</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(<span class="st">'dsExposomeClient'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: dsExposomeClient</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>user <span class="ot">&lt;-</span> <span class="st">"test"</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>pass <span class="ot">&lt;-</span> <span class="st">"Testtest1!"</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(httr);<span class="fu">set_config</span>(<span class="fu">config</span>(<span class="at">ssl_verifypeer =</span> 0L))</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>builder <span class="ot">&lt;-</span> DSI<span class="sc">::</span><span class="fu">newDSLoginBuilder</span>()</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>builder<span class="sc">$</span><span class="fu">append</span>(<span class="at">server =</span> <span class="st">'server1'</span>, </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">url =</span> <span class="st">"https://35.219.173.160/repo"</span>,</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">user =</span> user, </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">password =</span> pass, </span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">profile =</span> <span class="st">"default"</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>logindata <span class="ot">&lt;-</span> builder<span class="sc">$</span><span class="fu">build</span>()</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>conns <span class="ot">&lt;-</span> DSI<span class="sc">::</span><span class="fu">datashield.login</span>(<span class="at">logins =</span> logindata, <span class="at">assign =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Logging into the collaborating servers</code></pre>
+</div>
+</div>
+</section>
+<section id="assigning-the-resource" class="level3">
+<h3 class="anchored" data-anchor-id="assigning-the-resource">Assigning the resource</h3>
+<div class="cell" data-hash="dsexposome-demo_cache/html/unnamed-chunk-2_23205d2bb5b0bde6a170fca3975519a8">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">datashield.assign.resource</span>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  conns, </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">symbol =</span> <span class="st">'exposome_resource'</span>, </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">resource =</span> <span class="fu">list</span>(<span class="at">server1 =</span> <span class="st">'EXPOSOME.exposomeSet'</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ds.class</span>(<span class="st">"exposome_resource"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$server1
+[1] "RDataFileResourceClient" "FileResourceClient"     
+[3] "ResourceClient"          "R6"                     </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">datashield.assign.expr</span>(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  conns, </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">symbol =</span> <span class="st">"exposome_resource"</span>, </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">expr =</span> <span class="fu">quote</span>(<span class="fu">as.resource.object</span>(exposome_resource))</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ds.class</span>(<span class="st">"exposome_resource"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$server1
+[1] "ExposomeSet"
+attr(,"package")
+[1] "rexposome"</code></pre>
+</div>
+</div>
+</section>
+<section id="working-with-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="working-with-the-data">Working with the data</h3>
+<div class="cell" data-hash="dsexposome-demo_cache/html/unnamed-chunk-3_242432b0c12753ee903fe628678bca82">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ds.exposome_summary</span>(<span class="st">"exposome_resource"</span>, <span class="st">"AbsPM25"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$server1
+$server1$class
+[1] "numeric"
+
+$server1$length
+[1] 109
+
+$server1$`quantiles &amp; mean`
+       5%       10%       25%       50%       75%       90%       95%      Mean 
+0.2163124 0.2508699 0.3192557 0.3542890 0.3967783 0.4380127 0.4778897 0.3546863 </code></pre>
+</div>
+</div>
+<div class="cell" data-hash="dsexposome-demo_cache/html/unnamed-chunk-4_6bc7656a1847e2d10a0c38cf467daa1a">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>phenos <span class="ot">&lt;-</span> <span class="fu">ds.tableMissings</span>(<span class="st">"exposome_resource"</span>, <span class="at">set =</span> <span class="st">"phenotypes"</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ds.plotMissings</span>(phenos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$pooled</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="dsexposome-demo_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell" data-hash="dsexposome-demo_cache/html/unnamed-chunk-5_111e73cd74ec7ca33e33c6770670c7ea">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>exwas_results <span class="ot">&lt;-</span> <span class="fu">ds.exwas</span>(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"blood_pre ~ sex"</span>, </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Set =</span> <span class="st">"exposome_resource"</span>, </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">"gaussian"</span>,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"meta"</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1519047</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1197.42294195951</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1197.42294195951</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1197.42294195951 on 104 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.89869995368256e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 111.76175557854 20.2567443067107 0.30822940801969</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)  AbsPM25  sexmale
+(Intercept)   107.00000 37.95143 51.00000
+AbsPM25        37.95143 14.04205 18.13869
+sexmale        51.00000 18.13869 51.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 7.506173e-11
+AbsPM25     2.664535e-11
+sexmale     3.586820e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1197.42294195951</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1203652</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1127.14556780009</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1127.14556780009</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1127.14556780009 on 82 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (0)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 117.622191293159 0.504932865298639 1.01572038426259</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)        As  sexmale
+(Intercept)     85.0000 129.50356 46.00000
+As             129.5036 209.77235 74.57638
+sexmale         46.0000  74.57638 46.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -1.358558e-11
+As          -2.066969e-11
+sexmale     -7.133849e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1127.14556780009</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      473756</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      464.180628597352</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      464.180628597352</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 464.180628597352 on 30 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.22433320193735e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 119.148779842863 -1.46847454355474 -0.431806629933643</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)    BDE100  sexmale
+(Intercept)    33.00000 -18.09181  15.0000
+BDE100        -18.09181  15.06208 -10.3818
+sexmale        15.00000 -10.38180  15.0000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept)  1.787726e-11
+BDE100      -9.813705e-12
+sexmale      8.157031e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 464.180628597352</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      473756</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      471.425315674695</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      471.425315674695</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 471.425315674695 on 30 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.20552209968774e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 121.977021334502 1.28193392434311 -0.17844630797738</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)    BDE138   sexmale
+(Intercept)    33.00000 -55.04575  15.00000
+BDE138        -55.04575  93.50239 -24.16554
+sexmale        15.00000 -24.16554  15.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -1.610090e-11
+BDE138       2.684120e-11
+sexmale     -7.375434e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 471.425315674695</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      473756</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      446.347838385874</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      446.347838385874</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 446.347838385874 on 30 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.27323763211229e-15)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 119.879660679632 2.8699182613289 0.404483028516105</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)    BDE153   sexmale
+(Intercept)   33.000000 -3.517887 15.000000
+BDE153        -3.517887  3.937911 -2.878882
+sexmale       15.000000 -2.878882 15.000000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept)  2.430056e-12
+BDE153      -2.798317e-13
+sexmale      1.136868e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 446.347838385874</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      473756</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      474.009772420614</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      474.009772420614</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 474.009772420614 on 30 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (0)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 119.83115533075 0.131778078664524 -0.0382730632472564</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)     BDE154  sexmale
+(Intercept)    33.00000 -14.069335 15.00000
+BDE154        -14.06934   8.012922 -6.77832
+sexmale        15.00000  -6.778320 15.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept)  6.167511e-12
+BDE154      -2.623568e-12
+sexmale      2.813749e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 474.009772420614</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      473756</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      467.356511348283</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      467.356511348283</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 467.356511348283 on 30 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (8.5121058829191e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 122.499766560452 1.38921934208038 -0.41873536703828</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)     BDE17   sexmale
+(Intercept)    33.00000 -60.61769  15.00000
+BDE17         -60.61769 115.40791 -25.34911
+sexmale        15.00000 -25.34911  15.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -6.210144e-12
+BDE17        1.141798e-11
+sexmale     -2.870593e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 467.356511348283</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      473756</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      471.666531188978</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      471.666531188977</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 471.666531188977 on 30 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (4.81962285179896e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 119.269314459127 -0.488199111160134 -0.0753197229736496</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)    BDE183   sexmale
+(Intercept)    33.00000 -35.31841  15.00000
+BDE183        -35.31841  47.80948 -16.57127
+sexmale        15.00000 -16.57127  15.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -3.396394e-12
+BDE183       3.638867e-12
+sexmale     -1.563194e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 471.666531188977</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      473756</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      472.825401739809</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      472.825401739809</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 472.825401739809 on 30 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.20195317594892e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 120.735896850964 0.605452770514446 -0.153115084041081</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)    BDE190   sexmale
+(Intercept)    33.00000 -49.52966  15.00000
+BDE190        -49.52966  77.92810 -21.04496
+sexmale        15.00000 -21.04496  15.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -2.646061e-11
+BDE190       3.971801e-11
+sexmale     -1.197975e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 472.825401739809</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      473756</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      450.792891378526</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      450.792891378526</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 450.792891378526 on 30 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (3.78205688852307e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 120.048390047695 2.52247125087925 -0.555530820368764</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)     BDE209   sexmale
+(Intercept)  33.0000000 -0.5010599 15.000000
+BDE209       -0.5010599  3.9977499  1.429991
+sexmale      15.0000000  1.4299912 15.000000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept)  2.218314e-11
+BDE209      -3.437806e-13
+sexmale      1.011813e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 450.792891378526</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      473756</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      471.627607874181</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      471.627607874181</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 471.627607874181 on 30 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.20500513245282e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 118.404011610819 -1.11371799624765 0.271966929965684</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)     BDE28   sexmale
+(Intercept)     33.0000 -36.44380  15.00000
+BDE28          -36.4438  42.85586 -14.24088
+sexmale         15.0000 -14.24088  15.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept)  1.347189e-11
+BDE28       -1.488187e-11
+sexmale      6.110668e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 471.627607874181</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      473756</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      460.05088184543</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      460.05088184543</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 460.05088184543 on 30 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (3.70596391988894e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 119.525143211421 -1.53768215696981 -0.543739938258704</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)      BDE47   sexmale
+(Intercept)    33.00000 -10.292357 15.000000
+BDE47         -10.29236   9.990999 -7.335034
+sexmale        15.00000  -7.335034 15.000000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -2.629008e-12
+BDE47        8.018031e-13
+sexmale     -1.165290e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 460.05088184543</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      473756</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      455.129128899851</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      455.129128899851</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 455.129128899851 on 30 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (4.99470840086012e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 114.635404211815 -3.36729205342006 0.669326449640294</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)     BDE66   sexmale
+(Intercept)    33.00000 -47.21651  15.00000
+BDE66         -47.21651  69.59337 -19.72773
+sexmale        15.00000 -19.72773  15.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -6.849632e-12
+BDE66        9.772405e-12
+sexmale     -3.126388e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 455.129128899851</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      473756</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      471.003742631513</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      471.003742631513</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 471.003742631513 on 30 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (0)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 120.86186218873 0.953423393913462 -0.311963854738426</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)     BDE71   sexmale
+(Intercept)    33.00000 -33.31363  15.00000
+BDE71         -33.31363  37.61944 -12.84684
+sexmale        15.00000 -12.84684  15.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -1.460876e-11
+BDE71        1.477107e-11
+sexmale     -6.593837e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 471.003742631513</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      473756</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      466.166281560209</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      466.166281560209</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 466.166281560209 on 30 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (6.09559613345833e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 118.415684636004 -1.11641083361109 -0.0769767026529953</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)     BDE85   sexmale
+(Intercept)    33.00000 -40.69923  15.00000
+BDE85         -40.69923  56.52258 -18.73807
+sexmale        15.00000 -18.73807  15.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -2.289369e-11
+BDE85        2.819844e-11
+sexmale     -1.044498e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 466.166281560209</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      473756</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      450.156906502635</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      450.156906502635</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 450.156906502635 on 30 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.0099730716375e-15)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 118.946895208252 -1.7351741733943 -0.26378151726251</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)      BDE99   sexmale
+(Intercept)    33.00000 -17.698039 15.000000
+BDE99         -17.69804  17.556140 -9.078797
+sexmale        15.00000  -9.078797 15.000000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -6.082246e-12
+BDE99        3.227862e-12
+sexmale     -2.799538e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 450.156906502635</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1477010</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1365.07184347406</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1365.07184347406</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1365.07184347406 on 101 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (0)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 119.566607470218 5.22190741854217 0.503091764021239</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)    Benzene   sexmale
+(Intercept)   104.00000 -13.803723 50.000000
+Benzene       -13.80372   3.181762 -6.603901
+sexmale        50.00000  -6.603901 50.000000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -6.463097e-11
+Benzene      8.562984e-12
+sexmale     -3.122125e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1365.07184347406</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1334661</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1377.47093719675</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1377.47093719675</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1377.47093719675 on 91 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.65054059507034e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 117.959301687062 0.633419232363475 0.358253575636918</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)      bHCH  sexmale
+(Intercept)      94.000 144.32896 43.00000
+bHCH            144.329 231.60782 65.27292
+sexmale          43.000  65.27292 43.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 4.837375e-11
+bHCH        7.431966e-11
+sexmale     2.206946e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1377.47093719675</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1234902</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1214.90796058727</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1214.90796058727</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1214.90796058727 on 84 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.87137601414012e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 118.557447365104 1.25355446705448 0.12967296867204</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)      BPA  sexmale
+(Intercept)    87.00000 31.95379 42.00000
+BPA            31.95379 20.14550 15.26934
+sexmale        42.00000 15.26934 42.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -2.533795e-11
+BPA         -9.347530e-12
+sexmale     -1.206502e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1214.90796058727</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1435941</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1360.48821737081</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1360.48821737081</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1360.48821737081 on 98 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.67114247014874e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 119.305703977689 -2.0293411162545 0.414716170771642</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)      BTHM   sexmale
+(Intercept)   101.00000 16.358607 49.000000
+BTHM           16.35861  9.277953  7.539682
+sexmale        49.00000  7.539682 49.000000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -5.795187e-11
+BTHM        -9.378343e-12
+sexmale     -2.829381e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1360.48821737081</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1147948</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1100.93368611705</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1100.93368611705</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1100.93368611705 on 78 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (0)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 118.202498172392 -1.55316106802275 1.15983176496157</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)        Cd   sexmale
+(Intercept)   81.000000 -9.583497 42.000000
+Cd            -9.583497  6.134356 -6.298215
+sexmale       42.000000 -6.298215 42.000000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -5.792344e-11
+Cd           6.883133e-12
+sexmale     -3.012701e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1100.93368611705</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1435941</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1375.40545075223</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1375.40545075223</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1375.40545075223 on 98 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (3.30603815955636e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 120.099436609708 1.18052059592159 0.441650745554567</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)     CHCl3   sexmale
+(Intercept)   101.00000 -97.14696  49.00000
+CHCl3         -97.14696 102.30624 -47.02441
+sexmale        49.00000 -47.02441  49.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -3.188916e-11
+CHCl3        3.067702e-11
+sexmale     -1.531930e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1375.40545075223</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      861841</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      867.050748454601</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      867.0507484546</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 867.0507484546 on 58 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.31103891594655e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 118.501315595664 -0.236818205287842 0.630668271200876</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)         Co    sexmale
+(Intercept)   61.000000  2.1125887 30.0000000
+Co             2.112589  2.9838365 -0.1709497
+sexmale       30.000000 -0.1709497 30.0000000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -4.204992e-11
+Co          -1.443512e-12
+sexmale     -2.080469e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 867.0507484546</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1504406</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1400.78781164324</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1400.78781164324</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1400.78781164324 on 103 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (3.24613682199894e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 120.967149564696 -2.55422031583854 0.493925767206172</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)     Conn  sexmale
+(Intercept)   106.00000 88.17334 50.00000
+Conn           88.17334 78.39161 43.47854
+sexmale        50.00000 43.47854 50.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -3.736034e-11
+Conn        -3.103828e-11
+sexmale     -1.750777e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1400.78781164324</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1434027</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1379.89675325884</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1379.89675325884</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1379.89675325884 on 98 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (3.29527841143529e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 118.907226018519 -0.0211018435885999 0.443598909689226</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)  Cotinine  sexmale
+(Intercept)   101.00000  91.10936 48.00000
+Cotinine       91.10936 286.29378 39.78783
+sexmale        48.00000  39.78783 48.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -9.947598e-14
+Cotinine    -7.538414e-14
+sexmale     -9.947598e-14</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1379.89675325884</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1203652</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1088.32386267979</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1088.32386267979</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1088.32386267979 on 82 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (6.26705321078004e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 122.621494331889 -4.9738014178812 1.15581887487973</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)       Cs  sexmale
+(Intercept)     85.0000 73.58450 46.00000
+Cs              73.5845 65.39088 39.96066
+sexmale         46.0000 39.96066 46.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 5.741185e-12
+Cs          4.952483e-12
+sexmale     3.254286e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1088.32386267979</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      979600</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      780.940900893954</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      780.940900893954</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 780.940900893954 on 66 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.45558110454259e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 123.710786325713 -3.83435182338987 0.761694212956102</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)        Cu  sexmale
+(Intercept)    69.00000  89.89878 35.00000
+Cu             89.89878 119.36287 45.51925
+sexmale        35.00000  45.51925 35.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 4.108358e-11
+Cu          5.353318e-11
+sexmale     2.084732e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 780.940900893954</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1334661</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1378.30463758041</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1378.30463758041</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1378.30463758041 on 91 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.64954229871392e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 119.946744159402 -0.456019296672577 0.306628322129528</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)       DDE  sexmale
+(Intercept)     94.0000 204.33120 43.00000
+DDE            204.3312 459.51582 91.87115
+sexmale         43.0000  91.87115 43.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -4.288836e-11
+DDE         -9.326051e-11
+sexmale     -1.976730e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1378.30463758041</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1334661</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1361.23925911168</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1361.23925911168</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1361.23925911168 on 91 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.6702205120537e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 120.445125289695 -1.85604458985038 0.353115619626443</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)      DDT  sexmale
+(Intercept)    94.00000 76.52066 43.00000
+DDT            76.52066 68.16720 35.19547
+sexmale        43.00000 35.19547 43.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 3.839773e-11
+DDT         3.127976e-11
+sexmale     1.764988e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1361.23925911168</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1519047</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1402.80138779988</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1402.80138779988</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1402.80138779988 on 104 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.62073883040215e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 117.268285666053 0.000124124918682581 0.448426494296835</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)         Dens  sexmale
+(Intercept)         107 1.389114e+06     51.0
+Dens            1389114 2.019861e+10 640062.3
+sexmale              51 6.400623e+05     51.0</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -6.082246e-12
+Dens        -7.895505e-08
+sexmale     -2.771117e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1402.80138779988</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1450341</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1378.25527459881</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1378.25527459881</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1378.25527459881 on 99 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (0)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 119.41840355476 -0.662153954350744 0.341106706732308</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept) ETS1 sexmale
+(Intercept)         102   61      49
+ETS1                 61   61      26
+sexmale              49   26      49</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -8.114398e-12
+ETS1        -4.916956e-12
+sexmale     -3.851142e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1378.25527459881</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1450341</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1387.35063149755</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1387.35063149755</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1387.35063149755 on 99 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (0)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 118.950597130338 0.404588023026026 0.408024744393855</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>              (Intercept) G_pesticides1 sexmale
+(Intercept)           102            10      49
+G_pesticides1          10            10       6
+sexmale                49             6      49</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                      [,1]
+(Intercept)   6.720313e-11
+G_pesticides1 6.565415e-12
+sexmale       3.244338e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1387.35063149755</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1450341</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1370.04887793268</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1370.04887793268</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1370.04887793268 on 99 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.65948152865184e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 118.362801768106 0.910319619177156 0.450867052023115</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept) Gas1 sexmale
+(Intercept)         102   68      49
+Gas1                 68   68      32
+sexmale              49   32      49</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 9.336532e-12
+Gas1        6.366463e-12
+sexmale     4.320100e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1370.04887793268</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1101826</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1019.93883759459</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1019.93883759459</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1019.93883759459 on 75 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.11453440331456e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 116.491199260948 -1.37693669849973 0.390523438313537</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)      Green   sexmale
+(Intercept)     78.0000 -119.71979  38.00000
+Green         -119.7198  210.77225 -57.00664
+sexmale         38.0000  -57.00664  38.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -2.572165e-11
+Green        3.952749e-11
+sexmale     -1.251976e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1019.93883759459</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1435212</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1371.90599903906</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1371.90599903906</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1371.90599903906 on 98 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (0)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 118.952398929233 -0.14026357334066 0.504427208456317</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>              (Intercept) H_pesticides1 sexmale
+(Intercept)           101            35      49
+H_pesticides1          35            35      17
+sexmale                49            17      49</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                       [,1]
+(Intercept)   -6.969003e-11
+H_pesticides1 -2.432898e-11
+sexmale       -3.367973e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1371.90599903906</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1334661</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1346.60618074405</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1346.60618074405</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1346.60618074405 on 91 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.6883688416549e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 116.344359794087 1.55588234960814 0.517905540748152</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)       HCB  sexmale
+(Intercept)      94.000 151.91395 43.00000
+HCB             151.914 260.22523 66.79335
+sexmale          43.000  66.79335 43.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 1.546141e-11
+HCB         2.499334e-11
+sexmale     6.991741e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1346.60618074405</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1133976</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1063.43974875817</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1063.43974875817</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1063.43974875817 on 77 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (2.13789541677895e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 117.747744911041 1.06815455978445 1.09341944846531</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)       Hg  sexmale
+(Intercept)     80.0000 54.88950 38.00000
+Hg              54.8895 48.76985 24.37452
+sexmale         38.0000 24.37452 38.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -5.491074e-11
+Hg          -3.771738e-11
+sexmale     -2.611955e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1063.43974875817</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      897819</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      900.760478728397</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      900.760478728398</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 900.760478728398 on 60 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (3.78594156607102e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 118.604887949655 0.280374187940042 0.759100987740186</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)     MBzP  sexmale
+(Intercept)    63.00000 70.76873 33.00000
+MBzP           70.76873 85.21937 35.62512
+sexmale        33.00000 35.62512 33.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 4.375522e-11
+MBzP        4.916623e-11
+sexmale     2.282263e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 900.760478728398</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      897819</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      850.212220355361</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      850.212220355361</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 850.212220355361 on 60 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (4.01100331149319e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 114.502388752395 3.25427716580444 0.627809711108385</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)     MEHHP  sexmale
+(Intercept)    63.00000  86.84933 33.00000
+MEHHP          86.84933 124.55817 46.00206
+sexmale        33.00000  46.00206 33.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -3.292655e-11
+MEHHP       -4.534906e-11
+sexmale     -1.722356e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 850.212220355361</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      897819</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      900.746791675765</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      900.746791675766</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 900.746791675766 on 60 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.26199969597643e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 118.642372949206 0.275971469708407 0.730639009206265</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)     MEHP  sexmale
+(Intercept)    63.00000 66.74392 33.00000
+MEHP           66.74392 76.66254 35.11452
+sexmale        33.00000 35.11452 33.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -3.100808e-11
+MEHP        -3.284528e-11
+sexmale     -1.629985e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 900.746791675766</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      897819</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      846.908566248238</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      846.908566248238</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 846.908566248238 on 60 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (2.68443182871653e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 114.445203255716 3.57880922168405 0.454867050829365</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)     MEOHP  sexmale
+(Intercept)    63.00000  81.57506 33.00000
+MEOHP          81.57506 109.96089 43.95252
+sexmale        33.00000  43.95252 33.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -3.140599e-11
+MEOHP       -4.065925e-11
+sexmale     -1.644196e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 846.908566248238</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      897819</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      899.280423020636</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      899.280423020635</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 899.280423020635 on 60 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (2.52811457335908e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 120.057214938858 -0.400404399811394 0.636650359310954</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)      MEP sexmale
+(Intercept)     63.0000 168.8643 33.0000
+MEP            168.8643 465.5107 84.6583
+sexmale         33.0000  84.6583 33.0000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 1.331557e-11
+MEP         3.565681e-11
+sexmale     7.020162e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 899.280423020635</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      897819</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      844.198451997201</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      844.198451997201</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 844.198451997201 on 60 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (4.03957288276514e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 113.445265782094 3.78695059832772 0.967883925183594</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)      MiBP  sexmale
+(Intercept)    63.00000  89.25601 33.00000
+MiBP           89.25601 130.48953 45.77986
+sexmale        33.00000  45.77986 33.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -2.137313e-11
+MiBP        -3.028600e-11
+sexmale     -1.114131e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 844.198451997201</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      897819</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      895.317678257387</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      895.317678257386</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 895.317678257386 on 60 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (5.07860590569832e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 117.627454022973 0.808940648071094 0.837211602932565</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)      MnBP  sexmale
+(Intercept)    63.00000  97.46378 33.00000
+MnBP           97.46378 160.02898 49.03454
+sexmale        33.00000  49.03454 33.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 2.248157e-11
+MnBP        3.478728e-11
+sexmale     1.170974e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 895.317678257386</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1203652</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1129.6558337347</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1129.6558337347</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1129.6558337347 on 82 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (0)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 117.361215273602 0.553437114268777 1.1551237998106</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)        Mo  sexmale
+(Intercept)      85.000 146.64901 46.00000
+Mo              146.649 254.46515 78.14511
+sexmale          46.000  78.14511 46.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -3.258549e-11
+Mo          -5.622836e-11
+sexmale     -1.752198e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1129.6558337347</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1203652</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1119.00859500144</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1119.00859500144</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1119.00859500144 on 82 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (0)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 119.167728037918 -1.32500899567017 1.14135440643644</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)       Ni  sexmale
+(Intercept)    85.00000 54.15751 46.00000
+Ni             54.15751 40.81627 29.59813
+sexmale        46.00000 29.59813 46.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -2.211209e-11
+Ni          -1.410383e-11
+sexmale     -1.193712e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1119.00859500144</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1519047</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1188.29761333642</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1188.29761333642</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1188.29761333642 on 104 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (0)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 102.841008526209 10.927348895021 0.214156506640698</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)        NO  sexmale
+(Intercept)    107.0000 158.14358 51.00000
+NO             158.1436 235.80988 75.69874
+sexmale         51.0000  75.69874 51.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -1.462297e-11
+NO          -2.164047e-11
+sexmale     -6.892265e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1188.29761333642</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1519047</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1189.36512701726</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1189.36512701726</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1189.36512701726 on 104 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.91156235083075e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 93.993011157658 15.3545118710892 0.233974745184965</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)       NO2  sexmale
+(Intercept)    107.0000 174.13872 51.00000
+NO2            174.1387 284.45162 83.19533
+sexmale         51.0000  83.19533 51.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 1.041656e-11
+NO2         1.698908e-11
+sexmale     4.959588e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1189.36512701726</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1451522</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1339.33896990137</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1339.33896990137</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1339.33896990137 on 99 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (3.39505838716899e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 88.2500137857018 17.3081104761352 0.385437915253128</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)   Noise_d  sexmale
+(Intercept)     102.000 181.51098 49.00000
+Noise_d         181.511 323.14188 87.00331
+sexmale          49.000  87.00331 49.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 1.989520e-11
+Noise_d     3.541123e-11
+sexmale     9.464429e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1339.33896990137</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1451522</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1347.96626425012</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1347.96626425012</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1347.96626425012 on 99 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.68666542196805e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 98.3135912697742 12.0784349722308 0.402809185080678</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)   Noise_n  sexmale
+(Intercept)    102.0000 175.04553 49.00000
+Noise_n        175.0455 300.62964 83.77711
+sexmale         49.0000  83.77711 49.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 1.215028e-11
+Noise_n     2.087264e-11
+sexmale     5.741185e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1347.96626425012</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1519047</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1182.25941148045</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1182.25941148045</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1182.25941148045 on 104 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (0)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 94.1445937511656 13.3491748286758 0.222238160797125</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)       NOx  sexmale
+(Intercept)     107.000 199.12799 51.00000
+NOx             199.128 372.00450 95.15881
+sexmale          51.000  95.15881 51.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -1.494982e-11
+NOx         -2.790568e-11
+sexmale     -7.247536e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1182.25941148045</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      706784</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      619.296765843094</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      619.296765843093</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 619.296765843093 on 47 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (3.67088896781277e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 119.745674075148 -1.65751867861173 0.736135766001335</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)       Pb  sexmale
+(Intercept)    50.00000 39.31139 27.00000
+Pb             39.31139 34.70481 21.12125
+sexmale        27.00000 21.12125 27.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -2.548006e-11
+Pb          -2.003686e-11
+sexmale     -1.378453e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 619.296765843093</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1334661</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1379.02306222948</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1379.02306222948</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1379.02306222948 on 91 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.64868300494999e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 117.532775646701 1.79396473656315 0.325048046172992</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)   PCB118  sexmale
+(Intercept)    94.00000 74.10515 43.00000
+PCB118         74.10515 59.18396 34.06621
+sexmale        43.00000 34.06621 43.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 4.474998e-11
+PCB118      3.526912e-11
+sexmale     2.061995e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1379.02306222948</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1334661</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1250.74607963507</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1250.74607963507</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1250.74607963507 on 91 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (0)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 113.384053858524 4.51028189001168 0.74707407736259</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)   PCB138 sexmale
+(Intercept)     94.0000 111.9165 43.0000
+PCB138         111.9165 139.8661 49.0793
+sexmale         43.0000  49.0793 43.0000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -3.390710e-11
+PCB138      -4.033085e-11
+sexmale     -1.560352e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1250.74607963507</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1334661</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1244.15843409704</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1244.15843409704</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1244.15843409704 on 91 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (7.30953214259666e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 112.517373118997 4.16901693740991 0.722208912204727</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)    PCB153  sexmale
+(Intercept)     94.0000 140.87540 43.00000
+PCB153         140.8754 219.22513 62.29238
+sexmale         43.0000  62.29238 43.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 3.780087e-12
+PCB153      5.686118e-12
+sexmale     1.790568e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1244.15843409704</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1334661</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1258.33255021192</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1258.33255021192</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1258.33255021192 on 91 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.80680065375727e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 113.811625319804 3.77654767415186 0.568630985519478</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)    PCB180  sexmale
+(Intercept)     94.0000 125.04968 43.00000
+PCB180         125.0497 175.07675 55.77819
+sexmale         43.0000  55.77819 43.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -4.646949e-11
+PCB180      -6.177947e-11
+sexmale     -2.140155e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1258.33255021192</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      873350</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      698.39647383842</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      698.396473838421</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 698.396473838421 on 58 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (3.2551871621306e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 119.460026479677 0.312973867890051 0.347198966401143</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)     PFHxS   sexmale
+(Intercept)   61.000000 -3.611756 29.000000
+PFHxS         -3.611756  2.645855 -1.308537
+sexmale       29.000000 -1.308537 29.000000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept)  1.261924e-11
+PFHxS       -7.631396e-13
+sexmale      6.025402e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 698.396473838421</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      873350</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      696.015831133993</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      696.015831133993</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 696.015831133993 on 58 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.63315977940649e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 119.449988190069 1.16624710804486 0.442616364476099</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)      PFNA   sexmale
+(Intercept)   61.000000 -2.816859 29.000000
+PFNA          -2.816859  2.139420 -2.474203
+sexmale       29.000000 -2.474203 29.000000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -1.024603e-11
+PFNA         4.855560e-13
+sexmale     -4.945377e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 696.015831133993</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      873350</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      694.992377941257</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      694.992377941257</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 694.992377941257 on 58 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.63556444192838e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 118.705228356438 1.34376171751058 0.445923022292271</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)     PFOA sexmale
+(Intercept)    61.00000 31.29223 29.0000
+PFOA           31.29223 18.13778 13.8541
+sexmale        29.00000 13.85410 29.0000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 3.510081e-12
+PFOA        1.798339e-12
+sexmale     1.620037e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 694.992377941257</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      873350</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      691.970693402916</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      691.970693402915</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 691.970693402915 on 58 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (6.57082224722548e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 117.913480267671 1.90347450848792 0.320227425814556</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)     PFOS  sexmale
+(Intercept)    61.00000 49.37871 29.00000
+PFOS           49.37871 41.81563 23.75786
+sexmale        29.00000 23.75786 29.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 4.040146e-11
+PFOS        3.269429e-11
+sexmale     1.912781e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 691.970693402915</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1519047</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1349.43199879848</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1349.43199879848</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1349.43199879848 on 104 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.68483352484913e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 91.8319074989333 18.8678330179566 0.353324440948887</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)      PM10  sexmale
+(Intercept)     107.000 153.64596 51.00000
+PM10            153.646 220.86974 73.22267
+sexmale          51.000  73.22267 51.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 4.348522e-12
+PM10        6.248335e-12
+sexmale     1.961098e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1349.43199879848</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1519047</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1334.25283166869</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1334.25283166869</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1334.25283166869 on 104 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (6.81599858888561e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 109.49745044488 6.67888237563532 0.347835169759914</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)    PM10Cu  sexmale
+(Intercept)    107.0000 151.07815 51.00000
+PM10Cu         151.0782 215.59215 72.00163
+sexmale         51.0000  72.00163 51.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -3.959144e-11
+PM10Cu      -5.589307e-11
+sexmale     -1.891465e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1334.25283166869</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1519047</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1306.09353416755</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1306.09353416755</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1306.09353416755 on 104 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (5.22220489143991e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 80.0911065773918 13.2118283648898 0.310518957698744</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)   PM10Fe  sexmale
+(Intercept)    107.0000 314.6737  51.0000
+PM10Fe         314.6737 926.1600 150.0562
+sexmale         51.0000 150.0562  51.0000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 8.839152e-12
+PM10Fe      2.606093e-11
+sexmale     4.192202e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1306.09353416755</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1519047</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1383.19524172567</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1383.19524172567</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1383.19524172567 on 104 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.64371038506271e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 84.9230464122274 13.6854499474083 0.40075482744835</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)    PM10K  sexmale
+(Intercept)    107.0000 265.6687  51.0000
+PM10K          265.6687 659.9065 126.5202
+sexmale         51.0000 126.5202  51.0000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -8.185452e-12
+PM10K       -2.032730e-11
+sexmale     -3.737455e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1383.19524172567</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1519047</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1424.50217791036</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1424.50217791036</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1424.50217791036 on 104 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (4.78815094421832e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 116.350816369455 4.52337958238351 0.295779203652688</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)   PM10Ni  sexmale
+(Intercept)   107.00000 61.54202 51.00000
+PM10Ni         61.54202 35.95537 29.62909
+sexmale        51.00000 29.62909 51.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 8.895995e-12
+PM10Ni      5.115131e-12
+sexmale     4.277467e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1424.50217791036</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1519047</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1408.18377411446</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1408.18377411446</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1408.18377411446 on 104 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (4.84363335620067e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 73.586137008665 15.3624182934752 0.325578957204255</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)    PM10S  sexmale
+(Intercept)    107.0000 315.8799  51.0000
+PM10S          315.8799 932.6416 150.5949
+sexmale         51.0000 150.5949  51.0000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -2.643219e-12
+PM10S       -7.817746e-12
+sexmale     -1.094236e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1408.18377411446</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1519047</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1422.89910029977</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1422.89910029977</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1422.89910029977 on 104 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (3.19569668589858e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 98.6507287593671 6.82227063020215 0.365867174283802</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)   PM10SI  sexmale
+(Intercept)    107.0000 317.8872  51.0000
+PM10SI         317.8872 944.6929 151.4384
+sexmale         51.0000 151.4384  51.0000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 2.586376e-12
+PM10SI      7.684964e-12
+sexmale     1.350031e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1422.89910029977</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      965408</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      984.056119350746</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      984.056119350747</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 984.056119350747 on 65 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.15517076494546e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 119.546598016499 1.72802861752477 0.00463385079536172</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)      PM10V   sexmale
+(Intercept)    68.00000 -18.120252 31.000000
+PM10V         -18.12025  20.703261 -7.574057
+sexmale        31.00000  -7.574057 31.000000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -4.776268e-11
+PM10V        1.281604e-11
+sexmale     -2.171419e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 984.056119350747</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1519047</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1410.51626867333</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1410.51626867333</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1410.51626867333 on 104 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (3.22374951278671e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 107.676468741288 6.94313120210087 0.257784028294171</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)   PM10Zn sexmale
+(Intercept)    107.0000 174.0527 51.0000
+PM10Zn         174.0527 283.6550 83.2986
+sexmale         51.0000  83.2986 51.0000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -2.469847e-11
+PM10Zn      -4.018430e-11
+sexmale     -1.192291e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1410.51626867333</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1519047</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1215.21250248179</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1215.21250248179</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1215.21250248179 on 104 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.87090707105302e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 74.8897868746866 37.8164699491564 0.270675201346381</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)      PM25  sexmale
+(Intercept)    107.0000 124.70726 51.00000
+PM25           124.7073 145.49927 59.49303
+sexmale         51.0000  59.49303 51.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -4.263256e-14
+PM25        -3.685940e-14
+sexmale     -1.563194e-13</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1215.21250248179</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1519047</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1245.46329929643</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1245.46329929643</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1245.46329929643 on 104 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (3.65093729996165e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 109.894274759782 11.5265762579494 0.373693233859927</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)   PM25CU  sexmale
+(Intercept)   107.00000 83.74163 51.00000
+PM25CU         83.74163 66.97216 39.84996
+sexmale        51.00000 39.84996 51.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -1.455192e-11
+PM25CU      -1.133560e-11
+sexmale     -7.105427e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1245.46329929643</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1519047</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1371.78211694283</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1371.78211694283</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1371.78211694283 on 104 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (4.97215480765772e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 106.144198993611 5.84240553345981 0.520610071555387</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)   PM25FE  sexmale
+(Intercept)     107.000 232.6130  51.0000
+PM25FE          232.613 507.5913 110.0736
+sexmale          51.000 110.0736  51.0000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -1.767830e-11
+PM25FE      -3.843947e-11
+sexmale     -8.327561e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1371.78211694283</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1519047</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1433.82106247106</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1433.82106247106</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1433.82106247106 on 104 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (3.17135554242298e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 114.179103128346 2.28480939902879 0.392510940135876</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)    PM25K  sexmale
+(Intercept)     107.000 221.3830  51.0000
+PM25K           221.383 458.4451 104.9749
+sexmale          51.000 104.9749  51.0000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 3.164757e-11
+PM25K       6.547429e-11
+sexmale     1.523404e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1433.82106247106</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1519047</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1422.69193062429</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1422.69193062429</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1422.69193062429 on 104 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.59808100221278e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 116.865758155702 4.82158297431714 0.293188503895361</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)   PM25Ni  sexmale
+(Intercept)   107.00000 46.33567 51.00000
+PM25Ni         46.33567 20.63546 22.37724
+sexmale        51.00000 22.37724 51.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 2.052047e-11
+PM25Ni      8.887335e-12
+sexmale     9.734435e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1422.69193062429</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1519047</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1398.79104878531</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1398.79104878531</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1398.79104878531 on 104 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (0)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 55.6862326421675 21.3719044595084 0.307638221636466</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)    PM25S  sexmale
+(Intercept)    107.0000 316.7188  51.0000
+PM25S          316.7188 937.5653 151.0073
+sexmale         51.0000 151.0073  51.0000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 1.666933e-11
+PM25S       4.936140e-11
+sexmale     7.744916e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1398.79104878531</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1519047</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1305.56671334986</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1305.56671334986</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1305.56671334986 on 104 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (5.22431198831459e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 37.440091288285 35.92473215925 0.344492588529566</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)   PM25Sl  sexmale
+(Intercept)    107.0000 242.7114  51.0000
+PM25Sl         242.7114 550.6506 115.6859
+sexmale         51.0000 115.6859  51.0000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 1.507772e-11
+PM25Sl      3.422951e-11
+sexmale     7.005951e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1305.56671334986</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1504406</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1323.95725615601</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1323.95725615601</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1323.95725615601 on 103 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (3.43449914097131e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 117.629179309407 4.45672936567839 0.269896053189191</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)    PM25V  sexmale
+(Intercept)   106.00000 31.37103 50.00000
+PM25V          31.37103 14.76820 15.04382
+sexmale        50.00000 15.04382 50.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 6.106404e-11
+PM25V       1.807465e-11
+sexmale     2.869172e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1323.95725615601</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1519047</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1372.45206547734</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1372.45206547734</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1372.45206547734 on 104 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (0)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 112.341710388251 4.7312529773036 0.439710747147623</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)    PM25Zn  sexmale
+(Intercept)    107.0000 147.95483 51.00000
+PM25Zn         147.9548 207.42897 69.99151
+sexmale         51.0000  69.99151 51.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 1.642775e-11
+PM25Zn      2.268852e-11
+sexmale     7.958079e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1372.45206547734</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1519047</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1410.10371931487</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1410.10371931487</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1410.10371931487 on 104 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (3.22469260758579e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 111.951839281493 6.59504211554977 0.365162556787324</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)  PMcoarse  sexmale
+(Intercept)     107.000 113.04399 51.00000
+PMcoarse        113.044 120.02205 53.80298
+sexmale          51.000  53.80298 51.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 9.578116e-12
+PMcoarse    1.012257e-11
+sexmale     4.760636e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1410.10371931487</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1115047</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1052.73919981636</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1052.73919981636</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1052.73919981636 on 76 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (4.319247905718e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 117.913665309568 -1.10273506906082 1.03614645030538</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)        Sb   sexmale
+(Intercept)    79.00000 -20.22452  42.00000
+Sb            -20.22452  12.21589 -10.97989
+sexmale        42.00000 -10.97989  42.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -7.688072e-12
+Sb           1.999845e-12
+sexmale     -3.979039e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1052.73919981636</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      907399</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      829.529586915962</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      829.529586915962</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 829.529586915962 on 61 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (0)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 119.358300882509 -0.965944734817774 1.30069983410524</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)       Se sexmale
+(Intercept)    64.00000 68.48741 34.0000
+Se             68.48741 74.54423 36.6543
+sexmale        34.00000 36.65430 34.0000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 1.065814e-12
+Se          1.139533e-12
+sexmale     6.110668e-13</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 829.529586915962</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1519047</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1279.99069072933</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1279.99069072933</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1279.99069072933 on 104 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (0)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: -23.6380342766641 87.7691175783262 0.738034529489664</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)      Temp  sexmale
+(Intercept)    107.0000 173.57620 51.00000
+Temp           173.5762 281.59738 82.61334
+sexmale         51.0000  82.61334 51.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -7.815970e-12
+Temp        -1.266365e-11
+sexmale     -3.637979e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1279.99069072933</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1435941</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1365.11157582422</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1365.11157582422</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1365.11157582422 on 98 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.6654830611582e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 119.348573070225 -1.8881450934748 0.419176098106379</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)       THM   sexmale
+(Intercept)   101.00000 19.990788 49.000000
+THM            19.99079 10.314858  9.331756
+sexmale        49.00000  9.331756 49.000000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -5.583445e-11
+THM         -1.105488e-11
+sexmale     -2.725642e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1365.11157582422</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1203652</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1130.07919924514</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1130.07919924514</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1130.07919924514 on 82 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (1.00591868791736e-15)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 118.326358058386 -0.00885530772243507 1.12268911893543</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)        Tl   sexmale
+(Intercept)    85.00000 -69.54762  46.00000
+Tl            -69.54762  63.48667 -38.82754
+sexmale        46.00000 -38.82754  46.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -3.161915e-11
+Tl           2.588130e-11
+sexmale     -1.723777e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1130.07919924514</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      645722</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      510.968757386863</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      510.968757386864</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 510.968757386864 on 42 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (5.56123007317578e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 109.689639875294 6.26886529330528 0.0397814823121336</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)  X2cxMMHP sexmale
+(Intercept)    45.00000  71.95736 22.0000
+X2cxMMHP       71.95736 117.29119 35.7246
+sexmale        22.00000  35.72460 22.0000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 2.472689e-11
+X2cxMMHP    3.955236e-11
+sexmale     1.206502e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 510.968757386864</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      897819</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      871.794095773802</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      871.794095773802</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 871.794095773802 on 60 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (0)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 113.866230868544 3.22036657918874 0.606302853765122</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)  X5cxMEPP  sexmale
+(Intercept)     63.0000 100.42939 33.00000
+X5cxMEPP       100.4294 162.95615 53.22574
+sexmale         33.0000  53.22574 33.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -3.269918e-11
+X5cxMEPP    -5.212364e-11
+sexmale     -1.718092e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 871.794095773802</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      854344</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      829.507080306042</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      829.507080306042</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 829.507080306042 on 57 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (0)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 118.325042170953 2.40306363801263 1.27626181052682</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept) X7OHMMeOP  sexmale
+(Intercept)   60.000000  7.046569 31.00000
+X7OHMMeOP      7.046569  5.411702  2.23031
+sexmale       31.000000  2.230310 31.00000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                     [,1]
+(Intercept) -5.172751e-12
+X7OHMMeOP   -6.291634e-13
+sexmale     -2.671641e-12</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 829.507080306042</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 1...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1203652</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 2...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1129.01994844346</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Iteration 3...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>CURRENT DEVIANCE:      1129.01994844346</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SUMMARY OF MODEL STATE after iteration 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Current deviance 1129.01994844346 on 82 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Convergence criterion TRUE (2.01372472213139e-16)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+beta: 117.328383833728 0.412536008597136 1.11718781064777</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Information matrix overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>            (Intercept)       Zn  sexmale
+(Intercept)     85.0000 207.7315  46.0000
+Zn             207.7315 513.9067 112.7264
+sexmale         46.0000 112.7264  46.0000</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Score vector overall:</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>                    [,1]
+(Intercept) 5.263701e-11
+Zn          1.286038e-10
+sexmale     2.856382e-11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Current deviance: 1129.01994844346</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The computation of threshold for effective tests was not successful. NAs were generated on the correlation matrix so the calculation was aborted."</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb1345"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1345-1"><a href="#cb1345-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ds.plotExwas</span>(exwas_results, <span class="at">type=</span><span class="st">"manhattan"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$server1</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="dsexposome-demo_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell" data-hash="dsexposome-demo_cache/html/unnamed-chunk-6_ae14a719699d1cfc5855f7f9bab3082b">
+<div class="sourceCode cell-code" id="cb1347"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1347-1"><a href="#cb1347-1" aria-hidden="true" tabindex="-1"></a><span class="fu">datashield.logout</span>(conns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
