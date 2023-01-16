@@ -1,5 +1,10 @@
 ---
 title: "Non-disclosive Exposome analysis using Google Cloud and dsExposome"
+author:
+  - name: Xavier Escribà Montagut
+    email: xavier.escriba@isglobal.org
+    affiliations:
+      - name: ISGlobal
 format:
   html:
     toc: true
